@@ -48,11 +48,66 @@ body::before {
 main {
   position: relative;
   z-index: 1;
+  min-width: 0;
+}
+
+.page-shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  width: min(1280px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.sidebar {
+  position: sticky;
+  top: 92px;
+  align-self: start;
+  min-height: calc(100vh - 92px);
+  padding: 42px 0 32px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-group + .sidebar-group {
+  margin-top: 34px;
+}
+
+.sidebar-group h2 {
+  margin: 0 0 14px;
+  color: #8ddfff;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.sidebar-nav {
+  display: grid;
+  gap: 4px;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 10px 16px 10px 0;
+  color: #d7e0ff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a:focus {
+  color: #ffffff;
+  transform: translateX(6px);
 }
 
 .hero {
-  width: min(1080px, calc(100% - 32px));
-  margin: 72px auto 0;
+  width: 100%;
+  margin: 72px 0 0;
   padding-bottom: 58px;
 }
 
@@ -110,7 +165,7 @@ main {
 }
 
 .quick-strip {
-  padding: 34px clamp(16px, 4vw, 56px);
+  padding: 34px 0;
   background: rgba(2, 8, 20, 0.62);
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -120,8 +175,8 @@ main {
   display: flex;
   align-items: center;
   gap: 34px;
-  max-width: 1080px;
-  margin: 0 auto;
+  width: 100%;
+  padding: 0 clamp(16px, 3vw, 32px);
 }
 
 .quick-label {
@@ -152,11 +207,12 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 18px;
-  width: min(1080px, calc(100% - 32px));
-  margin: 52px auto 80px;
+  width: 100%;
+  margin: 52px 0 80px;
 }
 
 .formula-sections article {
+  scroll-margin-top: 110px;
   min-height: 130px;
   padding: 22px;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -171,6 +227,31 @@ main {
 }
 
 @media (max-width: 720px) {
+  .page-shell {
+    display: block;
+  }
+
+  .sidebar {
+    position: static;
+    min-height: 0;
+    padding: 28px 0 8px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .sidebar-nav {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .sidebar-nav a {
+    flex: 0 0 auto;
+    padding-right: 0;
+    white-space: nowrap;
+  }
+
   .hero {
     margin-top: 42px;
   }
